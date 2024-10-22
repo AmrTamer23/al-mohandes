@@ -1,130 +1,107 @@
 import { useTranslation } from "react-i18next"
 import { createFileRoute } from "@tanstack/react-router"
+import { motion } from "framer-motion"
 
-import { SiGithub } from "@icons-pack/react-simple-icons"
+import { ArrowRight, CheckCircle } from "lucide-react"
 
-import { Seo } from "@/components/layout/seo"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export const Route = createFileRoute("/_base/")({
   component: HomePage,
 })
 
 function HomePage() {
+  const fadeInUp = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.5 },
+  }
+
+  const stagger = {
+    animate: {
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  }
+
   const { t } = useTranslation()
-  console.log(t("description"))
+
   return (
-    <div className="flex w-full flex-col items-center text-center">
-      <Seo description="Welcome to a typesafe Vite/React starter kit!" />
-
-      <div className="w-full border-b bg-card py-20">
-        <div className="container flex flex-col items-center space-y-10">
-          <h1 className="max-w-2xl bg-gradient-to-b from-slate-400 to-indigo-500 bg-clip-text text-5xl font-extrabold text-transparent">
-            {t("description")}
-          </h1>
-
-          <div className="flex max-w-2xl flex-col items-center">
-            <p className="text-xs text-muted-foreground">Powered by</p>
-            <ul className="mt-3 flex flex-col font-bold">
-              <Button variant={"link"} asChild>
-                <li>
-                  <a
-                    href="https://tanstack.com/router/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    TanStack router ↗
-                  </a>
-                </li>
-              </Button>
-              <Button variant={"link"} asChild>
-                <li>
-                  <a
-                    href="https://tanstack.com/query/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    TanStack query ↗
-                  </a>
-                </li>
-              </Button>
-              <Button variant={"link"} asChild>
-                <li>
-                  <a
-                    href="https://tailwindcss.com/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Tailwind CSS ↗
-                  </a>
-                </li>
-              </Button>
-              <Button variant={"link"} asChild>
-                <li>
-                  <a
-                    href="https://ui.shadcn.com/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Shadcn UI ↗
-                  </a>
-                </li>
-              </Button>
-              <Button variant={"link"} asChild>
-                <li>
-                  <a
-                    href="https://github.com/total-typescript/ts-reset"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Total-Typescript ts reset ↗
-                  </a>
-                </li>
-              </Button>
-            </ul>
-          </div>
-
-          <Button size={"lg"} asChild>
-            <a
-              href="https://github.com/mattiaz9/vite-react-tanstack-tailwind-shadcn-starter"
-              target="_blank"
-              rel="noreferrer"
+    <div className="flex min-h-screen w-full flex-col">
+      <main className="flex-1">
+        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
+          <div className="container px-4 md:px-6">
+            <motion.div
+              className="flex flex-col items-center space-y-4 text-center"
+              {...fadeInUp}
             >
-              <SiGithub className="mr-2" size={18} />
-              Get the code!
-            </a>
-          </Button>
-        </div>
-      </div>
-
-      <div className="container my-12">
-        <h2 className="mb-8 text-xl font-bold">Explore some examples:</h2>
-        <div className="mx-auto grid w-full max-w-screen-md grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6">
-          {/* <Link to="/blog"> */}
-          <Card className="transition-colors hover:border-indigo-400">
-            <CardHeader>
-              <CardTitle>Simple blog</CardTitle>
-            </CardHeader>
-            <CardContent>
-              Simple blog with a list of posts and a detail page for each post.
-            </CardContent>
-          </Card>
-          {/* </Link> */}
-          <Card className="cursor-default transition-colors">
-            <CardHeader>
-              <CardTitle className="text-muted-foreground">TBD</CardTitle>
-            </CardHeader>
-            <CardContent></CardContent>
-          </Card>
-          <Card className="cursor-default transition-colors">
-            <CardHeader>
-              <CardTitle className="text-muted-foreground">TBD</CardTitle>
-            </CardHeader>
-            <CardContent></CardContent>
-          </Card>
-        </div>
-      </div>
+              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
+                {t("welcome")}
+              </h1>
+              <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl">
+                We provide innovative solutions for your business needs.
+                Discover how we can help you grow and succeed.
+              </p>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button className="bg-primary text-primary-foreground">
+                  Get Started <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+        <section className="w-full bg-gray-100 py-12 md:py-24 lg:py-32">
+          <div className="container px-4 md:px-6">
+            <motion.h2
+              className="mb-8 text-center text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl"
+              {...fadeInUp}
+            >
+              Our Services
+            </motion.h2>
+            <motion.div
+              className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3"
+              variants={stagger}
+              initial="initial"
+              animate="animate"
+            >
+              {[
+                "Web Development",
+                "Mobile Apps",
+                "Cloud Solutions",
+                "Data Analytics",
+                "Cybersecurity",
+                "AI & Machine Learning",
+              ].map((service, index) => (
+                <motion.div
+                  key={index}
+                  className="flex items-center space-x-4"
+                  variants={fadeInUp}
+                >
+                  <CheckCircle className="h-6 w-6 text-primary" />
+                  <h3 className="text-xl font-bold">{service}</h3>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+      </main>
+      <footer className="flex w-full shrink-0 flex-col items-center gap-2 border-t px-4 py-6 sm:flex-row md:px-6">
+        <p className="text-xs text-gray-500">
+          © 2024 Company Name. All rights reserved.
+        </p>
+        <nav className="flex gap-4 sm:ml-auto sm:gap-6">
+          <a className="text-xs underline-offset-4 hover:underline" href="#">
+            Terms of Service
+          </a>
+          <a className="text-xs underline-offset-4 hover:underline" href="#">
+            Privacy
+          </a>
+        </nav>
+      </footer>
     </div>
   )
 }
