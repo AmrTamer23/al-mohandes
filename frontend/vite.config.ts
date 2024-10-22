@@ -26,6 +26,10 @@ export default defineConfig(({ mode }) => ({
       "@": resolve("src"),
     },
   },
+  build: {
+    minify: true,
+    cssMinify: true,
+  },
   plugins: [
     TanStackRouterVite({
       routesDirectory: "./src/app",

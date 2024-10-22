@@ -79,12 +79,16 @@ function HomePage() {
                 <motion.div
                   key={index}
                   className="flex items-center space-x-4"
-                  variants={fadeInUp}
+                  variants={{
+                    initial: { opacity: 0, y: 20 },
+                    animate: { opacity: 1, y: 0 },
+                  }}
+                  transition={{ duration: 0.5 }}
                 >
                   <CheckCircle className="h-6 w-6 text-primary" />
                   <h3 className="text-xl font-bold">{service}</h3>
                 </motion.div>
-              ))}
+              ))}{" "}
             </motion.div>
           </div>
         </section>
