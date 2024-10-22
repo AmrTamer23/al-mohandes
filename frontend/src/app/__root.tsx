@@ -3,6 +3,11 @@ import { createRootRoute, Outlet } from "@tanstack/react-router"
 import "unfonts.css"
 import "./globals.css"
 
+import clsx from "clsx"
+import { useAtom } from "jotai"
+
+import { themeAtom } from "@/atoms/theme-atom"
+
 export const Route = createRootRoute({
   component: RootLayout,
   notFoundComponent: () => {
@@ -19,8 +24,11 @@ export const Route = createRootRoute({
 })
 
 export default function RootLayout() {
+  const [theme] = useAtom(themeAtom)
   return (
-    <div className="min-h-dvh w-full">
+    <div
+      className={clsx("min-h-dvh w-full", theme === "dark" ? "dark" : "light")}
+    >
       <Outlet />
     </div>
   )

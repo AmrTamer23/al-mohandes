@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router"
+import { useTranslation } from "react-i18next"
+import { createFileRoute } from "@tanstack/react-router"
 
 import { SiGithub } from "@icons-pack/react-simple-icons"
 
@@ -11,6 +12,8 @@ export const Route = createFileRoute("/_base/")({
 })
 
 function HomePage() {
+  const { t } = useTranslation()
+  console.log(t("description"))
   return (
     <div className="flex w-full flex-col items-center text-center">
       <Seo description="Welcome to a typesafe Vite/React starter kit!" />
@@ -18,7 +21,7 @@ function HomePage() {
       <div className="w-full border-b bg-card py-20">
         <div className="container flex flex-col items-center space-y-10">
           <h1 className="max-w-2xl bg-gradient-to-b from-slate-400 to-indigo-500 bg-clip-text text-5xl font-extrabold text-transparent">
-            Welcome to a typesafe Vite/React starter kit!
+            {t("description")}
           </h1>
 
           <div className="flex max-w-2xl flex-col items-center">
@@ -98,17 +101,16 @@ function HomePage() {
       <div className="container my-12">
         <h2 className="mb-8 text-xl font-bold">Explore some examples:</h2>
         <div className="mx-auto grid w-full max-w-screen-md grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6">
-          <Link to="/blog">
-            <Card className="transition-colors hover:border-indigo-400">
-              <CardHeader>
-                <CardTitle>Simple blog</CardTitle>
-              </CardHeader>
-              <CardContent>
-                Simple blog with a list of posts and a detail page for each
-                post.
-              </CardContent>
-            </Card>
-          </Link>
+          {/* <Link to="/blog"> */}
+          <Card className="transition-colors hover:border-indigo-400">
+            <CardHeader>
+              <CardTitle>Simple blog</CardTitle>
+            </CardHeader>
+            <CardContent>
+              Simple blog with a list of posts and a detail page for each post.
+            </CardContent>
+          </Card>
+          {/* </Link> */}
           <Card className="cursor-default transition-colors">
             <CardHeader>
               <CardTitle className="text-muted-foreground">TBD</CardTitle>
