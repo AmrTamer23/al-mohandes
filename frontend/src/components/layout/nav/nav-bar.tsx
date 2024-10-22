@@ -2,8 +2,6 @@ import { useTranslation } from "react-i18next"
 import { Link } from "@tanstack/react-router"
 
 import { MenuIcon } from "lucide-react"
-import WhiteLogo from "@/assets/imgs/logo.webp"
-import RedLogo from "@/assets/imgs/red-logo.webp"
 
 import { DesktopNavList } from "./desktop-nav-list"
 import { MobileNavDropdown } from "./mobile-nav-list"
