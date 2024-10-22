@@ -33,21 +33,21 @@ const navigation = [
     titleAR: "عننا",
     path: `/about`,
   },
-  {
-    title: "Services",
-    titleAR: "خدماتنا",
-    path: `/services`,
-  },
-  {
-    title: "Portfolio",
-    titleAR: "أعمالنا",
-    path: `/portfolio`,
-  },
-  {
-    title: "Contact",
-    titleAR: "اتصل بنا",
-    path: `/contact`,
-  },
+  // {
+  //   title: "Services",
+  //   titleAR: "خدماتنا",
+  //   path: `/services`,
+  // },
+  // {
+  //   title: "Portfolio",
+  //   titleAR: "أعمالنا",
+  //   path: `/portfolio`,
+  // },
+  // {
+  //   title: "Contact",
+  //   titleAR: "اتصل بنا",
+  //   path: `/contact`,
+  // },
 ]
 
 export function Navbar() {
@@ -61,7 +61,7 @@ export function Navbar() {
     <nav className="fixed z-[50] mt-[2rem] flex h-fit w-full min-w-full items-center justify-center p-2">
       <div
         className={clsx(
-          "relative flex w-[90%] justify-between rounded-xl border border-white border-opacity-20 bg-white bg-opacity-10 p-2 shadow-lg backdrop-blur-lg backdrop-filter dark:border-zinc-900 dark:bg-black",
+          "relative flex w-[60%] justify-between rounded-xl border border-white border-opacity-20 bg-white bg-opacity-10 p-2 shadow-lg backdrop-blur-lg backdrop-filter dark:border-zinc-900 dark:bg-black",
           !isRTL ? "flex-row" : "flex-row-reverse",
         )}
       >
