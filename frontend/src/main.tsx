@@ -5,7 +5,15 @@ import { createRouter, RouterProvider } from "@tanstack/react-router"
 
 import "@/i18n"
 
+import { cacheExchange, Client, fetchExchange, Provider } from "urql"
+
 import { routeTree } from "./routes.gen"
+
+const client = new Client({
+  //TODO: change to be in the .env file
+  url: "http://localhost:3000/api/graphql",
+  exchanges: [cacheExchange, fetchExchange],
+})
 
 // Set up a Router instance
 const isBotAgent = /bot|googlebot|crawler|spider|robot|crawling/i.test(
@@ -34,8 +42,10 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <Provider value={client}>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </Provider>
   </React.StrictMode>,
 )
