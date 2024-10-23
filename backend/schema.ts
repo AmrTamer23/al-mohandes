@@ -5,8 +5,8 @@
 // If you want to learn more about how lists are configured, please read
 // - https://keystonejs.com/docs/config/lists
 
-import { list } from '@keystone-6/core'
-import { allowAll } from '@keystone-6/core/access'
+import { list } from "@keystone-6/core";
+import { allowAll } from "@keystone-6/core/access";
 
 // see https://keystonejs.com/docs/fields/overview for the full list of fields
 //   this is a few common fields for an example
@@ -16,15 +16,15 @@ import {
   password,
   timestamp,
   select,
-} from '@keystone-6/core/fields'
+} from "@keystone-6/core/fields";
 
 // the document field is a more complicated field, so it has it's own package
-import { document } from '@keystone-6/fields-document'
+import { document } from "@keystone-6/fields-document";
 // if you want to make your own fields, see https://keystonejs.com/docs/guides/custom-fields
 
 // when using Typescript, you can refine your types to a stricter subset by importing
 // the generated types from '.keystone/types'
-import { type Lists } from '.keystone/types'
+import { type Lists } from ".keystone/types";
 
 export const lists = {
   User: list({
@@ -44,106 +44,74 @@ export const lists = {
         validation: { isRequired: true },
         // by adding isIndexed: 'unique', we're saying that no user can have the same
         // email as another user - this may or may not be a good idea for your project
-        isIndexed: 'unique',
+        isIndexed: "unique",
       }),
 
       password: password({ validation: { isRequired: true } }),
 
       // we can use this field to see what Posts this User has authored
       //   more on that in the Post list below
-      posts: relationship({ ref: 'Post.author', many: true }),
 
       createdAt: timestamp({
         // this sets the timestamp to Date.now() when the user is first created
-        defaultValue: { kind: 'now' },
+        defaultValue: { kind: "now" },
       }),
     },
   }),
 
-  Post: list({
-    // WARNING
-    //   for this starter project, anyone can create, query, update and delete anything
-    //   if you want to prevent random people on the internet from accessing your data,
-    //   you can find out more at https://keystonejs.com/docs/guides/auth-and-access-control
-    access: allowAll,
-
-    // this is the fields for our Post list
+  HomePage: list({
     fields: {
-      title: text({ validation: { isRequired: true } }),
-
-      // the document field can be used for making rich editable content
-      //   you can find out more at https://keystonejs.com/docs/guides/document-fields
-      content: document({
-        formatting: true,
-        layouts: [
-          [1, 1],
-          [1, 1, 1],
-          [2, 1],
-          [1, 2],
-          [1, 2, 1],
-        ],
-        links: true,
-        dividers: true,
+      // Non-translatable fields (metadata, for example)
+      slug: text({
+        validation: { isRequired: true },
+        defaultValue: "home",
+        ui: { createView: { fieldMode: "hidden" } },
       }),
 
-      // with this field, you can set a User as the author for a Post
-      author: relationship({
-        // we could have used 'User', but then the relationship would only be 1-way
-        ref: 'User.posts',
-
-        // this is some customisations for changing how this will look in the AdminUI
-        ui: {
-          displayMode: 'cards',
-          cardFields: ['name', 'email'],
-          inlineEdit: { fields: ['name', 'email'] },
-          linkToItem: true,
-          inlineConnect: true,
-        },
-
-        // a Post can only have one author
-        //   this is the default, but we show it here for verbosity
-        many: false,
+      // Translatable fields for Hero section
+      heroTitle_en: text({ label: "Hero Title (English)" }),
+      heroTitle_ar: text({ label: "Hero Title (Arabic)" }),
+      heroDescription_en: text({
+        ui: { displayMode: "textarea" },
+        label: "Hero Description (English)",
+      }),
+      heroDescription_ar: text({
+        ui: { displayMode: "textarea" },
+        label: "Hero Description (Arabic)",
       }),
 
-      // with this field, you can add some Tags to Posts
-      tags: relationship({
-        // we could have used 'Tag', but then the relationship would only be 1-way
-        ref: 'Tag.posts',
-
-        // a Post can have many Tags, not just one
-        many: true,
-
-        // this is some customisations for changing how this will look in the AdminUI
-        ui: {
-          displayMode: 'cards',
-          cardFields: ['name'],
-          inlineEdit: { fields: ['name'] },
-          linkToItem: true,
-          inlineConnect: true,
-          inlineCreate: { fields: ['name'] },
-        },
+      // Translatable fields for Our Mission section
+      missionTitle_en: text({ label: "Mission Title (English)" }),
+      missionTitle_ar: text({ label: "Mission Title (Arabic)" }),
+      missionDescription_en: text({
+        ui: { displayMode: "textarea" },
+        label: "Mission Description (English)",
       }),
+      missionDescription_ar: text({
+        ui: { displayMode: "textarea" },
+        label: "Mission Description (Arabic)",
+      }),
+
+      // Translatable fields for About Us section
+      aboutUsTitle_en: text({ label: "About Us Title (English)" }),
+      aboutUsTitle_ar: text({ label: "About Us Title (Arabic)" }),
+      aboutUsDescription_en: text({
+        ui: { displayMode: "textarea" },
+        label: "About Us Description (English)",
+      }),
+      aboutUsDescription_ar: text({
+        ui: { displayMode: "textarea" },
+        label: "About Us Description (Arabic)",
+      }),
+
+      // General sections for a company website
+      contactInfo_en: text({ label: "Contact Info (English)" }),
+      contactInfo_ar: text({ label: "Contact Info (Arabic)" }),
+
+      // Timestamps
+      createdAt: timestamp(),
+      updatedAt: timestamp(),
     },
-  }),
-
-  // this last list is our Tag list, it only has a name field for now
-  Tag: list({
-    // WARNING
-    //   for this starter project, anyone can create, query, update and delete anything
-    //   if you want to prevent random people on the internet from accessing your data,
-    //   you can find out more at https://keystonejs.com/docs/guides/auth-and-access-control
     access: allowAll,
-
-    // setting this to isHidden for the user interface prevents this list being visible in the Admin UI
-    ui: {
-      isHidden: true,
-    },
-
-    // this is the fields for our Tag list
-    fields: {
-      name: text(),
-      // this can be helpful to find out all the Posts associated with a Tag
-      posts: relationship({ ref: 'Post.tags', many: true }),
-    },
   }),
-} satisfies Lists
+} satisfies Lists;

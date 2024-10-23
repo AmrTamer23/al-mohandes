@@ -8,9 +8,13 @@
     "build": "keystone build"
   },
   "dependencies": {
+    "@apollo/client": "^3.11.8",
     "@keystone-6/auth": "^8.0.0",
     "@keystone-6/core": "^6.0.0",
     "@keystone-6/fields-document": "^9.0.0",
+    "@types/cors": "^2.8.17",
+    "cors": "^2.8.5",
+    "graphql": "^16.9.0",
     "typescript": "^5.5.0"
   }
 }

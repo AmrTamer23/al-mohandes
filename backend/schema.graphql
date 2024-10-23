@@ -6,8 +6,6 @@ type User {
   name: String
   email: String
   password: PasswordState
-  posts(where: PostWhereInput! = {}, orderBy: [PostOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: PostWhereUniqueInput): [Post!]
-  postsCount(where: PostWhereInput! = {}): Int
   createdAt: DateTime
 }
 
@@ -29,7 +27,6 @@ input UserWhereInput {
   id: IDFilter
   name: StringFilter
   email: StringFilter
-  posts: PostManyRelationFilter
   createdAt: DateTimeNullableFilter
 }
 
@@ -72,12 +69,6 @@ input NestedStringFilter {
   not: NestedStringFilter
 }
 
-input PostManyRelationFilter {
-  every: PostWhereInput
-  some: PostWhereInput
-  none: PostWhereInput
-}
-
 input DateTimeNullableFilter {
   equals: DateTime
   in: [DateTime!]
@@ -105,15 +96,7 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
-  posts: PostRelateToManyForUpdateInput
   createdAt: DateTime
-}
-
-input PostRelateToManyForUpdateInput {
-  disconnect: [PostWhereUniqueInput!]
-  set: [PostWhereUniqueInput!]
-  create: [PostCreateInput!]
-  connect: [PostWhereUniqueInput!]
 }
 
 input UserUpdateArgs {
@@ -125,133 +108,122 @@ input UserCreateInput {
   name: String
   email: String
   password: String
-  posts: PostRelateToManyForCreateInput
   createdAt: DateTime
 }
 
-input PostRelateToManyForCreateInput {
-  create: [PostCreateInput!]
-  connect: [PostWhereUniqueInput!]
-}
-
-type Post {
+type HomePage {
   id: ID!
-  title: String
-  content: Post_content_Document
-  author: User
-  tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
-  tagsCount(where: TagWhereInput! = {}): Int
+  slug: String
+  heroTitle_en: String
+  heroTitle_ar: String
+  heroDescription_en: String
+  heroDescription_ar: String
+  missionTitle_en: String
+  missionTitle_ar: String
+  missionDescription_en: String
+  missionDescription_ar: String
+  aboutUsTitle_en: String
+  aboutUsTitle_ar: String
+  aboutUsDescription_en: String
+  aboutUsDescription_ar: String
+  contactInfo_en: String
+  contactInfo_ar: String
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
-type Post_content_Document {
-  document(hydrateRelationships: Boolean! = false): JSON!
-}
-
-input PostWhereUniqueInput {
+input HomePageWhereUniqueInput {
   id: ID
 }
 
-input PostWhereInput {
-  AND: [PostWhereInput!]
-  OR: [PostWhereInput!]
-  NOT: [PostWhereInput!]
+input HomePageWhereInput {
+  AND: [HomePageWhereInput!]
+  OR: [HomePageWhereInput!]
+  NOT: [HomePageWhereInput!]
   id: IDFilter
-  title: StringFilter
-  author: UserWhereInput
-  tags: TagManyRelationFilter
+  slug: StringFilter
+  heroTitle_en: StringFilter
+  heroTitle_ar: StringFilter
+  heroDescription_en: StringFilter
+  heroDescription_ar: StringFilter
+  missionTitle_en: StringFilter
+  missionTitle_ar: StringFilter
+  missionDescription_en: StringFilter
+  missionDescription_ar: StringFilter
+  aboutUsTitle_en: StringFilter
+  aboutUsTitle_ar: StringFilter
+  aboutUsDescription_en: StringFilter
+  aboutUsDescription_ar: StringFilter
+  contactInfo_en: StringFilter
+  contactInfo_ar: StringFilter
+  createdAt: DateTimeNullableFilter
+  updatedAt: DateTimeNullableFilter
 }
 
-input TagManyRelationFilter {
-  every: TagWhereInput
-  some: TagWhereInput
-  none: TagWhereInput
-}
-
-input PostOrderByInput {
+input HomePageOrderByInput {
   id: OrderDirection
-  title: OrderDirection
+  slug: OrderDirection
+  heroTitle_en: OrderDirection
+  heroTitle_ar: OrderDirection
+  heroDescription_en: OrderDirection
+  heroDescription_ar: OrderDirection
+  missionTitle_en: OrderDirection
+  missionTitle_ar: OrderDirection
+  missionDescription_en: OrderDirection
+  missionDescription_ar: OrderDirection
+  aboutUsTitle_en: OrderDirection
+  aboutUsTitle_ar: OrderDirection
+  aboutUsDescription_en: OrderDirection
+  aboutUsDescription_ar: OrderDirection
+  contactInfo_en: OrderDirection
+  contactInfo_ar: OrderDirection
+  createdAt: OrderDirection
+  updatedAt: OrderDirection
 }
 
-input PostUpdateInput {
-  title: String
-  content: JSON
-  author: UserRelateToOneForUpdateInput
-  tags: TagRelateToManyForUpdateInput
+input HomePageUpdateInput {
+  slug: String
+  heroTitle_en: String
+  heroTitle_ar: String
+  heroDescription_en: String
+  heroDescription_ar: String
+  missionTitle_en: String
+  missionTitle_ar: String
+  missionDescription_en: String
+  missionDescription_ar: String
+  aboutUsTitle_en: String
+  aboutUsTitle_ar: String
+  aboutUsDescription_en: String
+  aboutUsDescription_ar: String
+  contactInfo_en: String
+  contactInfo_ar: String
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
-input UserRelateToOneForUpdateInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
-  disconnect: Boolean
+input HomePageUpdateArgs {
+  where: HomePageWhereUniqueInput!
+  data: HomePageUpdateInput!
 }
 
-input TagRelateToManyForUpdateInput {
-  disconnect: [TagWhereUniqueInput!]
-  set: [TagWhereUniqueInput!]
-  create: [TagCreateInput!]
-  connect: [TagWhereUniqueInput!]
-}
-
-input PostUpdateArgs {
-  where: PostWhereUniqueInput!
-  data: PostUpdateInput!
-}
-
-input PostCreateInput {
-  title: String
-  content: JSON
-  author: UserRelateToOneForCreateInput
-  tags: TagRelateToManyForCreateInput
-}
-
-input UserRelateToOneForCreateInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
-}
-
-input TagRelateToManyForCreateInput {
-  create: [TagCreateInput!]
-  connect: [TagWhereUniqueInput!]
-}
-
-type Tag {
-  id: ID!
-  name: String
-  posts(where: PostWhereInput! = {}, orderBy: [PostOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: PostWhereUniqueInput): [Post!]
-  postsCount(where: PostWhereInput! = {}): Int
-}
-
-input TagWhereUniqueInput {
-  id: ID
-}
-
-input TagWhereInput {
-  AND: [TagWhereInput!]
-  OR: [TagWhereInput!]
-  NOT: [TagWhereInput!]
-  id: IDFilter
-  name: StringFilter
-  posts: PostManyRelationFilter
-}
-
-input TagOrderByInput {
-  id: OrderDirection
-  name: OrderDirection
-}
-
-input TagUpdateInput {
-  name: String
-  posts: PostRelateToManyForUpdateInput
-}
-
-input TagUpdateArgs {
-  where: TagWhereUniqueInput!
-  data: TagUpdateInput!
-}
-
-input TagCreateInput {
-  name: String
-  posts: PostRelateToManyForCreateInput
+input HomePageCreateInput {
+  slug: String
+  heroTitle_en: String
+  heroTitle_ar: String
+  heroDescription_en: String
+  heroDescription_ar: String
+  missionTitle_en: String
+  missionTitle_ar: String
+  missionDescription_en: String
+  missionDescription_ar: String
+  aboutUsTitle_en: String
+  aboutUsTitle_ar: String
+  aboutUsDescription_en: String
+  aboutUsDescription_ar: String
+  contactInfo_en: String
+  contactInfo_ar: String
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 """
@@ -266,18 +238,12 @@ type Mutation {
   updateUsers(data: [UserUpdateArgs!]!): [User]
   deleteUser(where: UserWhereUniqueInput!): User
   deleteUsers(where: [UserWhereUniqueInput!]!): [User]
-  createPost(data: PostCreateInput!): Post
-  createPosts(data: [PostCreateInput!]!): [Post]
-  updatePost(where: PostWhereUniqueInput!, data: PostUpdateInput!): Post
-  updatePosts(data: [PostUpdateArgs!]!): [Post]
-  deletePost(where: PostWhereUniqueInput!): Post
-  deletePosts(where: [PostWhereUniqueInput!]!): [Post]
-  createTag(data: TagCreateInput!): Tag
-  createTags(data: [TagCreateInput!]!): [Tag]
-  updateTag(where: TagWhereUniqueInput!, data: TagUpdateInput!): Tag
-  updateTags(data: [TagUpdateArgs!]!): [Tag]
-  deleteTag(where: TagWhereUniqueInput!): Tag
-  deleteTags(where: [TagWhereUniqueInput!]!): [Tag]
+  createHomePage(data: HomePageCreateInput!): HomePage
+  createHomePages(data: [HomePageCreateInput!]!): [HomePage]
+  updateHomePage(where: HomePageWhereUniqueInput!, data: HomePageUpdateInput!): HomePage
+  updateHomePages(data: [HomePageUpdateArgs!]!): [HomePage]
+  deleteHomePage(where: HomePageWhereUniqueInput!): HomePage
+  deleteHomePages(where: [HomePageWhereUniqueInput!]!): [HomePage]
   endSession: Boolean!
   authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
@@ -304,12 +270,9 @@ type Query {
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput! = {}, orderBy: [UserOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: UserWhereUniqueInput): [User!]
   usersCount(where: UserWhereInput! = {}): Int
-  post(where: PostWhereUniqueInput!): Post
-  posts(where: PostWhereInput! = {}, orderBy: [PostOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: PostWhereUniqueInput): [Post!]
-  postsCount(where: PostWhereInput! = {}): Int
-  tag(where: TagWhereUniqueInput!): Tag
-  tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
-  tagsCount(where: TagWhereInput! = {}): Int
+  homePage(where: HomePageWhereUniqueInput!): HomePage
+  homePages(where: HomePageWhereInput! = {}, orderBy: [HomePageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: HomePageWhereUniqueInput): [HomePage!]
+  homePagesCount(where: HomePageWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }
