@@ -32,7 +32,8 @@
     ".eslintrc.cjs",
     "postcss.config.cjs",
     "prettier.config.mjs",
-    "tailwind.config.ts"
+    "tailwind.config.ts",
+    "codegen.ts"
   ],
   "exclude": ["build", "node_modules", "public"],
   "references": [
