@@ -1,21 +1,30 @@
-import { useTranslation } from "react-i18next"
-import { createFileRoute } from "@tanstack/react-router"
-import { motion } from "framer-motion"
+import { useTranslation } from "react-i18next";
+import { createFileRoute } from "@tanstack/react-router";
+import { motion } from "framer-motion";
+import { useQuery } from "urql";
 
-import { ArrowRight, CheckCircle } from "lucide-react"
+import { ArrowRight, CheckCircle } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
+import { HomePageQuery } from "@/queries/fetch-homepage";
 
 export const Route = createFileRoute("/_base/")({
   component: HomePage,
-})
+});
 
 function HomePage() {
+  const [{ data }] = useQuery({
+    query: HomePageQuery,
+    variables: {
+      take: 1,
+    },
+  });
+
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.5 },
-  }
+  };
 
   const stagger = {
     animate: {
@@ -23,9 +32,13 @@ function HomePage() {
         staggerChildren: 0.1,
       },
     },
-  }
+  };
 
-  const { t } = useTranslation()
+  const { i18n } = useTranslation();
+
+  const lang = i18n.language;
+
+  console.log(data?.homePages?.[0]?.heroTitle_ar);
 
   return (
     <div className="flex min-h-screen w-full flex-col">
@@ -37,11 +50,14 @@ function HomePage() {
               {...fadeInUp}
             >
               <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                {t("welcome")}
+                {lang === "ar"
+                  ? data?.homePages?.[0]?.heroTitle_ar
+                  : data?.homePages?.[0]?.heroTitle_en}
               </h1>
               <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl">
-                We provide innovative solutions for your business needs.
-                Discover how we can help you grow and succeed.
+                {lang === "ar"
+                  ? data?.homePages?.[0]?.heroDescription_ar
+                  : data?.homePages?.[0]?.heroDescription_en}
               </p>
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -107,5 +123,5 @@ function HomePage() {
         </nav>
       </footer>
     </div>
-  )
+  );
 }
