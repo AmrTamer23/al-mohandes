@@ -1,8 +1,9 @@
-import type { CodegenConfig } from "@graphql-codegen/cli"
+import type { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
   overwrite: true,
-  schema: "http://localhost:3000/api/graphql",
+  schema:
+    import.meta.env.REACT_APP_API_URL || "http://localhost:3001/api/graphql",
   documents: "src/**/*.{ts,tsx}",
   generates: {
     "src/gql/": {
@@ -10,6 +11,6 @@ const config: CodegenConfig = {
       plugins: [],
     },
   },
-}
+};
 
-export default config
+export default config;

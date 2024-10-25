@@ -15,7 +15,7 @@ import { lists } from "./schema";
 import { withAuth, session } from "./auth";
 
 const corsOptions = {
-  origin: "http://localhost:5173", // Allow your frontend origin
+  origin: "*", // Allow your frontend origin
   methods: ["GET", "POST", "OPTIONS"], // Allowed methods
   credentials: true, // Allow credentials
 };
@@ -34,6 +34,7 @@ export default withAuth(
     // Add the CORS middleware
     server: {
       cors: corsOptions,
+      port: 3001,
     },
   })
 );
