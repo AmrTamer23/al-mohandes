@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "install": "cd backend && bun i & cd frontend && pnpm install",
     "dev": "cd backend && pnpm run dev & cd frontend && pnpm run dev",
     "build": "cd backend && pnpm run build && cd ../frontend && pnpm run build",
     "start": "cd backend && pnpm run start & cd ../frontend && pnpm run start"
