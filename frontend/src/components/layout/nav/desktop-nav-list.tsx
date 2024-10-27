@@ -1,6 +1,6 @@
-import { Link } from "@tanstack/react-router"
+import { Link } from "@tanstack/react-router";
 
-import { ListItem } from "@/components/ui/list-item"
+import { ListItem } from "@/components/ui/list-item";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -8,17 +8,17 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
+} from "@/components/ui/navigation-menu";
 
 export function DesktopNavList({
   locale,
   item,
 }: {
-  locale: "en" | "ar"
+  locale: "en" | "ar";
   item: {
-    title: string
-    titleAR: string
-  }
+    title: string;
+    titleAR: string;
+  };
 }) {
   return (
     <NavigationMenu>
@@ -30,7 +30,7 @@ export function DesktopNavList({
             </Link>
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid max-h-[85dvh] w-[400px] gap-3 overflow-y-auto p-4 md:w-[500px] md:grid-cols-2 lg:w-[35dvw]">
+            <ul className="grid max-h-[85dvh] w-[400px] gap-3 overflow-y-auto p-4 md:w-[500px] md:grid-cols-2 lg:w-[35dvw] *:dark:text-zinc-200">
               <li className="md:col-span-2">
                 <NavigationMenuLink asChild>
                   <Link
@@ -208,5 +208,5 @@ export function DesktopNavList({
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-  )
+  );
 }
