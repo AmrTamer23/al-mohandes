@@ -26,34 +26,17 @@ import { document } from "@keystone-6/fields-document";
 // the generated types from '.keystone/types'
 import { type Lists } from ".keystone/types";
 
-export const lists = {
+export const lists: Lists = {
   User: list({
-    // WARNING
-    //   for this starter project, anyone can create, query, update and delete anything
-    //   if you want to prevent random people on the internet from accessing your data,
-    //   you can find out more at https://keystonejs.com/docs/guides/auth-and-access-control
     access: allowAll,
-
-    // this is the fields for our User list
     fields: {
-      // by adding isRequired, we enforce that every User should have a name
-      //   if no name is provided, an error will be displayed
       name: text({ validation: { isRequired: true } }),
-
       email: text({
         validation: { isRequired: true },
-        // by adding isIndexed: 'unique', we're saying that no user can have the same
-        // email as another user - this may or may not be a good idea for your project
         isIndexed: "unique",
       }),
-
       password: password({ validation: { isRequired: true } }),
-
-      // we can use this field to see what Posts this User has authored
-      //   more on that in the Post list below
-
       createdAt: timestamp({
-        // this sets the timestamp to Date.now() when the user is first created
         defaultValue: { kind: "now" },
       }),
     },
@@ -61,14 +44,11 @@ export const lists = {
 
   HomePage: list({
     fields: {
-      // Non-translatable fields (metadata, for example)
       slug: text({
         validation: { isRequired: true },
         defaultValue: "home",
         ui: { createView: { fieldMode: "hidden" } },
       }),
-
-      // Translatable fields for Hero section
       heroTitle_en: text({ label: "Hero Title (English)" }),
       heroTitle_ar: text({ label: "Hero Title (Arabic)" }),
       heroDescription_en: text({
@@ -79,8 +59,6 @@ export const lists = {
         ui: { displayMode: "textarea" },
         label: "Hero Description (Arabic)",
       }),
-
-      // Translatable fields for Our Mission section
       missionTitle_en: text({ label: "Mission Title (English)" }),
       missionTitle_ar: text({ label: "Mission Title (Arabic)" }),
       missionDescription_en: text({
@@ -91,8 +69,6 @@ export const lists = {
         ui: { displayMode: "textarea" },
         label: "Mission Description (Arabic)",
       }),
-
-      // Translatable fields for About Us section
       aboutUsTitle_en: text({ label: "About Us Title (English)" }),
       aboutUsTitle_ar: text({ label: "About Us Title (Arabic)" }),
       aboutUsDescription_en: text({
@@ -103,15 +79,192 @@ export const lists = {
         ui: { displayMode: "textarea" },
         label: "About Us Description (Arabic)",
       }),
-
-      // General sections for a company website
       contactInfo_en: text({ label: "Contact Info (English)" }),
       contactInfo_ar: text({ label: "Contact Info (Arabic)" }),
-
-      // Timestamps
       createdAt: timestamp(),
       updatedAt: timestamp(),
     },
     access: allowAll,
   }),
-} satisfies Lists;
+
+  Service: list({
+    fields: {
+      title_en: text({
+        label: "Service Title (English)",
+        validation: { isRequired: true },
+      }),
+      title_ar: text({
+        label: "Service Title (Arabic)",
+        validation: { isRequired: true },
+      }),
+      description_en: text({
+        ui: { displayMode: "textarea" },
+        label: "Service Description (English)",
+      }),
+      description_ar: text({
+        ui: { displayMode: "textarea" },
+        label: "Service Description (Arabic)",
+      }),
+      imageUrl: text({ label: "Service Image URL" }),
+    },
+    access: allowAll,
+  }),
+
+  OurServicesPage: list({
+    fields: {
+      slug: text({
+        validation: { isRequired: true },
+        defaultValue: "our-services",
+        ui: { createView: { fieldMode: "hidden" } },
+      }),
+      ourServicesTitle_en: text({ label: "Our Services Title (English)" }),
+      ourServicesTitle_ar: text({ label: "Our Services Title (Arabic)" }),
+      ourServicesDesc_en: text({
+        ui: { displayMode: "textarea" },
+        label: "Our Services Description (English)",
+      }),
+      ourServicesDesc_ar: text({
+        ui: { displayMode: "textarea" },
+        label: "Our Services Description (Arabic)",
+      }),
+
+      services: relationship({
+        ref: "Service",
+        many: true,
+        label: "Services Offered",
+      }),
+
+      createdAt: timestamp(),
+      updatedAt: timestamp(),
+    },
+    access: allowAll,
+  }),
+  Job: list({
+    fields: {
+      title_en: text({
+        label: "Job Title (English)",
+        validation: { isRequired: true },
+      }),
+      title_ar: text({
+        label: "Job Title (Arabic)",
+        validation: { isRequired: true },
+      }),
+      description_en: text({
+        ui: { displayMode: "textarea" },
+        label: "Job Description (English)",
+      }),
+      description_ar: text({
+        ui: { displayMode: "textarea" },
+        label: "Job Description (Arabic)",
+      }),
+      requirements_en: text({
+        ui: { displayMode: "textarea" },
+        label: "Job Requirements (English)",
+      }),
+      requirements_ar: text({
+        ui: { displayMode: "textarea" },
+        label: "Job Requirements (Arabic)",
+      }),
+    },
+    access: allowAll,
+  }),
+
+  // Recruitment (توظيف) schema
+  Recruitment: list({
+    fields: {
+      slug: text({
+        validation: { isRequired: true },
+        defaultValue: "recruitment",
+        ui: { createView: { fieldMode: "hidden" } },
+      }),
+      title_en: text({
+        label: "Page Title (English)",
+        validation: { isRequired: true },
+      }),
+      title_ar: text({
+        label: "Page Title (Arabic)",
+        validation: { isRequired: true },
+      }),
+      description_en: text({
+        ui: { displayMode: "textarea" },
+        label: "Page Description (English)",
+      }),
+      description_ar: text({
+        ui: { displayMode: "textarea" },
+        label: "Page Description (Arabic)",
+      }),
+
+      jobs: relationship({
+        ref: "Job",
+        many: true,
+        label: "Available Jobs",
+      }),
+
+      createdAt: timestamp(),
+      updatedAt: timestamp(),
+    },
+    access: allowAll,
+  }),
+  AboutCompany: list({
+    fields: {
+      slug: text({
+        validation: { isRequired: true },
+        defaultValue: "about-company",
+        ui: { createView: { fieldMode: "hidden" } },
+      }),
+
+      // General information about the company
+      title_en: text({
+        label: "Page Title (English)",
+        validation: { isRequired: true },
+      }),
+      title_ar: text({
+        label: "Page Title (Arabic)",
+        validation: { isRequired: true },
+      }),
+
+      introduction_en: text({
+        ui: { displayMode: "textarea" },
+        label: "Introduction (English)",
+      }),
+      introduction_ar: text({
+        ui: { displayMode: "textarea" },
+        label: "Introduction (Arabic)",
+      }),
+
+      // Vision statement
+      vision_en: text({
+        ui: { displayMode: "textarea" },
+        label: "Vision (English)",
+      }),
+      vision_ar: text({
+        ui: { displayMode: "textarea" },
+        label: "Vision (Arabic)",
+      }),
+
+      // Mission statement
+      mission_en: text({
+        ui: { displayMode: "textarea" },
+        label: "Mission (English)",
+      }),
+      mission_ar: text({
+        ui: { displayMode: "textarea" },
+        label: "Mission (Arabic)",
+      }),
+
+      // Core values section, supporting multiple values
+      coreValues_en: text({
+        ui: { displayMode: "textarea" },
+        label: "Core Values (English)",
+      }),
+      coreValues_ar: text({
+        ui: { displayMode: "textarea" },
+        label: "Core Values (Arabic)",
+      }),
+
+      createdAt: timestamp(),
+      updatedAt: timestamp(),
+    },
+    access: allowAll,
+  }),
+};

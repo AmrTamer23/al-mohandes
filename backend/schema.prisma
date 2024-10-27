@@ -39,3 +39,65 @@ model HomePage {
   createdAt             DateTime?
   updatedAt             DateTime?
 }
+
+model Service {
+  id                            String            @id @default(cuid())
+  title_en                      String            @default("")
+  title_ar                      String            @default("")
+  description_en                String            @default("")
+  description_ar                String            @default("")
+  imageUrl                      String            @default("")
+  from_OurServicesPage_services OurServicesPage[] @relation("OurServicesPage_services")
+}
+
+model OurServicesPage {
+  id                  String    @id @default(cuid())
+  slug                String    @default("our-services")
+  ourServicesTitle_en String    @default("")
+  ourServicesTitle_ar String    @default("")
+  ourServicesDesc_en  String    @default("")
+  ourServicesDesc_ar  String    @default("")
+  services            Service[] @relation("OurServicesPage_services")
+  createdAt           DateTime?
+  updatedAt           DateTime?
+}
+
+model Job {
+  id                    String        @id @default(cuid())
+  title_en              String        @default("")
+  title_ar              String        @default("")
+  description_en        String        @default("")
+  description_ar        String        @default("")
+  requirements_en       String        @default("")
+  requirements_ar       String        @default("")
+  from_Recruitment_jobs Recruitment[] @relation("Recruitment_jobs")
+}
+
+model Recruitment {
+  id             String    @id @default(cuid())
+  slug           String    @default("recruitment")
+  title_en       String    @default("")
+  title_ar       String    @default("")
+  description_en String    @default("")
+  description_ar String    @default("")
+  jobs           Job[]     @relation("Recruitment_jobs")
+  createdAt      DateTime?
+  updatedAt      DateTime?
+}
+
+model AboutCompany {
+  id              String    @id @default(cuid())
+  slug            String    @default("about-company")
+  title_en        String    @default("")
+  title_ar        String    @default("")
+  introduction_en String    @default("")
+  introduction_ar String    @default("")
+  vision_en       String    @default("")
+  vision_ar       String    @default("")
+  mission_en      String    @default("")
+  mission_ar      String    @default("")
+  coreValues_en   String    @default("")
+  coreValues_ar   String    @default("")
+  createdAt       DateTime?
+  updatedAt       DateTime?
+}

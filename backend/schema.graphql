@@ -226,6 +226,392 @@ input HomePageCreateInput {
   updatedAt: DateTime
 }
 
+type Service {
+  id: ID!
+  title_en: String
+  title_ar: String
+  description_en: String
+  description_ar: String
+  imageUrl: String
+}
+
+input ServiceWhereUniqueInput {
+  id: ID
+}
+
+input ServiceWhereInput {
+  AND: [ServiceWhereInput!]
+  OR: [ServiceWhereInput!]
+  NOT: [ServiceWhereInput!]
+  id: IDFilter
+  title_en: StringFilter
+  title_ar: StringFilter
+  description_en: StringFilter
+  description_ar: StringFilter
+  imageUrl: StringFilter
+}
+
+input ServiceOrderByInput {
+  id: OrderDirection
+  title_en: OrderDirection
+  title_ar: OrderDirection
+  description_en: OrderDirection
+  description_ar: OrderDirection
+  imageUrl: OrderDirection
+}
+
+input ServiceUpdateInput {
+  title_en: String
+  title_ar: String
+  description_en: String
+  description_ar: String
+  imageUrl: String
+}
+
+input ServiceUpdateArgs {
+  where: ServiceWhereUniqueInput!
+  data: ServiceUpdateInput!
+}
+
+input ServiceCreateInput {
+  title_en: String
+  title_ar: String
+  description_en: String
+  description_ar: String
+  imageUrl: String
+}
+
+type OurServicesPage {
+  id: ID!
+  slug: String
+  ourServicesTitle_en: String
+  ourServicesTitle_ar: String
+  ourServicesDesc_en: String
+  ourServicesDesc_ar: String
+  services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
+  servicesCount(where: ServiceWhereInput! = {}): Int
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input OurServicesPageWhereUniqueInput {
+  id: ID
+}
+
+input OurServicesPageWhereInput {
+  AND: [OurServicesPageWhereInput!]
+  OR: [OurServicesPageWhereInput!]
+  NOT: [OurServicesPageWhereInput!]
+  id: IDFilter
+  slug: StringFilter
+  ourServicesTitle_en: StringFilter
+  ourServicesTitle_ar: StringFilter
+  ourServicesDesc_en: StringFilter
+  ourServicesDesc_ar: StringFilter
+  services: ServiceManyRelationFilter
+  createdAt: DateTimeNullableFilter
+  updatedAt: DateTimeNullableFilter
+}
+
+input ServiceManyRelationFilter {
+  every: ServiceWhereInput
+  some: ServiceWhereInput
+  none: ServiceWhereInput
+}
+
+input OurServicesPageOrderByInput {
+  id: OrderDirection
+  slug: OrderDirection
+  ourServicesTitle_en: OrderDirection
+  ourServicesTitle_ar: OrderDirection
+  ourServicesDesc_en: OrderDirection
+  ourServicesDesc_ar: OrderDirection
+  createdAt: OrderDirection
+  updatedAt: OrderDirection
+}
+
+input OurServicesPageUpdateInput {
+  slug: String
+  ourServicesTitle_en: String
+  ourServicesTitle_ar: String
+  ourServicesDesc_en: String
+  ourServicesDesc_ar: String
+  services: ServiceRelateToManyForUpdateInput
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ServiceRelateToManyForUpdateInput {
+  disconnect: [ServiceWhereUniqueInput!]
+  set: [ServiceWhereUniqueInput!]
+  create: [ServiceCreateInput!]
+  connect: [ServiceWhereUniqueInput!]
+}
+
+input OurServicesPageUpdateArgs {
+  where: OurServicesPageWhereUniqueInput!
+  data: OurServicesPageUpdateInput!
+}
+
+input OurServicesPageCreateInput {
+  slug: String
+  ourServicesTitle_en: String
+  ourServicesTitle_ar: String
+  ourServicesDesc_en: String
+  ourServicesDesc_ar: String
+  services: ServiceRelateToManyForCreateInput
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ServiceRelateToManyForCreateInput {
+  create: [ServiceCreateInput!]
+  connect: [ServiceWhereUniqueInput!]
+}
+
+type Job {
+  id: ID!
+  title_en: String
+  title_ar: String
+  description_en: String
+  description_ar: String
+  requirements_en: String
+  requirements_ar: String
+}
+
+input JobWhereUniqueInput {
+  id: ID
+}
+
+input JobWhereInput {
+  AND: [JobWhereInput!]
+  OR: [JobWhereInput!]
+  NOT: [JobWhereInput!]
+  id: IDFilter
+  title_en: StringFilter
+  title_ar: StringFilter
+  description_en: StringFilter
+  description_ar: StringFilter
+  requirements_en: StringFilter
+  requirements_ar: StringFilter
+}
+
+input JobOrderByInput {
+  id: OrderDirection
+  title_en: OrderDirection
+  title_ar: OrderDirection
+  description_en: OrderDirection
+  description_ar: OrderDirection
+  requirements_en: OrderDirection
+  requirements_ar: OrderDirection
+}
+
+input JobUpdateInput {
+  title_en: String
+  title_ar: String
+  description_en: String
+  description_ar: String
+  requirements_en: String
+  requirements_ar: String
+}
+
+input JobUpdateArgs {
+  where: JobWhereUniqueInput!
+  data: JobUpdateInput!
+}
+
+input JobCreateInput {
+  title_en: String
+  title_ar: String
+  description_en: String
+  description_ar: String
+  requirements_en: String
+  requirements_ar: String
+}
+
+type Recruitment {
+  id: ID!
+  slug: String
+  title_en: String
+  title_ar: String
+  description_en: String
+  description_ar: String
+  jobs(where: JobWhereInput! = {}, orderBy: [JobOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: JobWhereUniqueInput): [Job!]
+  jobsCount(where: JobWhereInput! = {}): Int
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input RecruitmentWhereUniqueInput {
+  id: ID
+}
+
+input RecruitmentWhereInput {
+  AND: [RecruitmentWhereInput!]
+  OR: [RecruitmentWhereInput!]
+  NOT: [RecruitmentWhereInput!]
+  id: IDFilter
+  slug: StringFilter
+  title_en: StringFilter
+  title_ar: StringFilter
+  description_en: StringFilter
+  description_ar: StringFilter
+  jobs: JobManyRelationFilter
+  createdAt: DateTimeNullableFilter
+  updatedAt: DateTimeNullableFilter
+}
+
+input JobManyRelationFilter {
+  every: JobWhereInput
+  some: JobWhereInput
+  none: JobWhereInput
+}
+
+input RecruitmentOrderByInput {
+  id: OrderDirection
+  slug: OrderDirection
+  title_en: OrderDirection
+  title_ar: OrderDirection
+  description_en: OrderDirection
+  description_ar: OrderDirection
+  createdAt: OrderDirection
+  updatedAt: OrderDirection
+}
+
+input RecruitmentUpdateInput {
+  slug: String
+  title_en: String
+  title_ar: String
+  description_en: String
+  description_ar: String
+  jobs: JobRelateToManyForUpdateInput
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input JobRelateToManyForUpdateInput {
+  disconnect: [JobWhereUniqueInput!]
+  set: [JobWhereUniqueInput!]
+  create: [JobCreateInput!]
+  connect: [JobWhereUniqueInput!]
+}
+
+input RecruitmentUpdateArgs {
+  where: RecruitmentWhereUniqueInput!
+  data: RecruitmentUpdateInput!
+}
+
+input RecruitmentCreateInput {
+  slug: String
+  title_en: String
+  title_ar: String
+  description_en: String
+  description_ar: String
+  jobs: JobRelateToManyForCreateInput
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input JobRelateToManyForCreateInput {
+  create: [JobCreateInput!]
+  connect: [JobWhereUniqueInput!]
+}
+
+type AboutCompany {
+  id: ID!
+  slug: String
+  title_en: String
+  title_ar: String
+  introduction_en: String
+  introduction_ar: String
+  vision_en: String
+  vision_ar: String
+  mission_en: String
+  mission_ar: String
+  coreValues_en: String
+  coreValues_ar: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input AboutCompanyWhereUniqueInput {
+  id: ID
+}
+
+input AboutCompanyWhereInput {
+  AND: [AboutCompanyWhereInput!]
+  OR: [AboutCompanyWhereInput!]
+  NOT: [AboutCompanyWhereInput!]
+  id: IDFilter
+  slug: StringFilter
+  title_en: StringFilter
+  title_ar: StringFilter
+  introduction_en: StringFilter
+  introduction_ar: StringFilter
+  vision_en: StringFilter
+  vision_ar: StringFilter
+  mission_en: StringFilter
+  mission_ar: StringFilter
+  coreValues_en: StringFilter
+  coreValues_ar: StringFilter
+  createdAt: DateTimeNullableFilter
+  updatedAt: DateTimeNullableFilter
+}
+
+input AboutCompanyOrderByInput {
+  id: OrderDirection
+  slug: OrderDirection
+  title_en: OrderDirection
+  title_ar: OrderDirection
+  introduction_en: OrderDirection
+  introduction_ar: OrderDirection
+  vision_en: OrderDirection
+  vision_ar: OrderDirection
+  mission_en: OrderDirection
+  mission_ar: OrderDirection
+  coreValues_en: OrderDirection
+  coreValues_ar: OrderDirection
+  createdAt: OrderDirection
+  updatedAt: OrderDirection
+}
+
+input AboutCompanyUpdateInput {
+  slug: String
+  title_en: String
+  title_ar: String
+  introduction_en: String
+  introduction_ar: String
+  vision_en: String
+  vision_ar: String
+  mission_en: String
+  mission_ar: String
+  coreValues_en: String
+  coreValues_ar: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input AboutCompanyUpdateArgs {
+  where: AboutCompanyWhereUniqueInput!
+  data: AboutCompanyUpdateInput!
+}
+
+input AboutCompanyCreateInput {
+  slug: String
+  title_en: String
+  title_ar: String
+  introduction_en: String
+  introduction_ar: String
+  vision_en: String
+  vision_ar: String
+  mission_en: String
+  mission_ar: String
+  coreValues_en: String
+  coreValues_ar: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -244,6 +630,36 @@ type Mutation {
   updateHomePages(data: [HomePageUpdateArgs!]!): [HomePage]
   deleteHomePage(where: HomePageWhereUniqueInput!): HomePage
   deleteHomePages(where: [HomePageWhereUniqueInput!]!): [HomePage]
+  createService(data: ServiceCreateInput!): Service
+  createServices(data: [ServiceCreateInput!]!): [Service]
+  updateService(where: ServiceWhereUniqueInput!, data: ServiceUpdateInput!): Service
+  updateServices(data: [ServiceUpdateArgs!]!): [Service]
+  deleteService(where: ServiceWhereUniqueInput!): Service
+  deleteServices(where: [ServiceWhereUniqueInput!]!): [Service]
+  createOurServicesPage(data: OurServicesPageCreateInput!): OurServicesPage
+  createOurServicesPages(data: [OurServicesPageCreateInput!]!): [OurServicesPage]
+  updateOurServicesPage(where: OurServicesPageWhereUniqueInput!, data: OurServicesPageUpdateInput!): OurServicesPage
+  updateOurServicesPages(data: [OurServicesPageUpdateArgs!]!): [OurServicesPage]
+  deleteOurServicesPage(where: OurServicesPageWhereUniqueInput!): OurServicesPage
+  deleteOurServicesPages(where: [OurServicesPageWhereUniqueInput!]!): [OurServicesPage]
+  createJob(data: JobCreateInput!): Job
+  createJobs(data: [JobCreateInput!]!): [Job]
+  updateJob(where: JobWhereUniqueInput!, data: JobUpdateInput!): Job
+  updateJobs(data: [JobUpdateArgs!]!): [Job]
+  deleteJob(where: JobWhereUniqueInput!): Job
+  deleteJobs(where: [JobWhereUniqueInput!]!): [Job]
+  createRecruitment(data: RecruitmentCreateInput!): Recruitment
+  createRecruitments(data: [RecruitmentCreateInput!]!): [Recruitment]
+  updateRecruitment(where: RecruitmentWhereUniqueInput!, data: RecruitmentUpdateInput!): Recruitment
+  updateRecruitments(data: [RecruitmentUpdateArgs!]!): [Recruitment]
+  deleteRecruitment(where: RecruitmentWhereUniqueInput!): Recruitment
+  deleteRecruitments(where: [RecruitmentWhereUniqueInput!]!): [Recruitment]
+  createAboutCompany(data: AboutCompanyCreateInput!): AboutCompany
+  createAboutCompanies(data: [AboutCompanyCreateInput!]!): [AboutCompany]
+  updateAboutCompany(where: AboutCompanyWhereUniqueInput!, data: AboutCompanyUpdateInput!): AboutCompany
+  updateAboutCompanies(data: [AboutCompanyUpdateArgs!]!): [AboutCompany]
+  deleteAboutCompany(where: AboutCompanyWhereUniqueInput!): AboutCompany
+  deleteAboutCompanies(where: [AboutCompanyWhereUniqueInput!]!): [AboutCompany]
   endSession: Boolean!
   authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
@@ -273,6 +689,21 @@ type Query {
   homePage(where: HomePageWhereUniqueInput!): HomePage
   homePages(where: HomePageWhereInput! = {}, orderBy: [HomePageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: HomePageWhereUniqueInput): [HomePage!]
   homePagesCount(where: HomePageWhereInput! = {}): Int
+  service(where: ServiceWhereUniqueInput!): Service
+  services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
+  servicesCount(where: ServiceWhereInput! = {}): Int
+  ourServicesPage(where: OurServicesPageWhereUniqueInput!): OurServicesPage
+  ourServicesPages(where: OurServicesPageWhereInput! = {}, orderBy: [OurServicesPageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: OurServicesPageWhereUniqueInput): [OurServicesPage!]
+  ourServicesPagesCount(where: OurServicesPageWhereInput! = {}): Int
+  job(where: JobWhereUniqueInput!): Job
+  jobs(where: JobWhereInput! = {}, orderBy: [JobOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: JobWhereUniqueInput): [Job!]
+  jobsCount(where: JobWhereInput! = {}): Int
+  recruitment(where: RecruitmentWhereUniqueInput!): Recruitment
+  recruitments(where: RecruitmentWhereInput! = {}, orderBy: [RecruitmentOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: RecruitmentWhereUniqueInput): [Recruitment!]
+  recruitmentsCount(where: RecruitmentWhereInput! = {}): Int
+  aboutCompany(where: AboutCompanyWhereUniqueInput!): AboutCompany
+  aboutCompanies(where: AboutCompanyWhereInput! = {}, orderBy: [AboutCompanyOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: AboutCompanyWhereUniqueInput): [AboutCompany!]
+  aboutCompaniesCount(where: AboutCompanyWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }
