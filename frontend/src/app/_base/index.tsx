@@ -2,14 +2,11 @@
 
 import { useTranslation } from "react-i18next";
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "framer-motion";
 import { useQuery } from "urql";
 import HeroImage from "@/assets/hero.png";
-import BuildingImage from "@/assets/building.avif"; // Make sure to add this image to your assets
 
-import { ArrowRight, Building2, CheckCircle } from "lucide-react";
+import { Building2 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { HomePageQuery } from "@/queries/fetch-homepage";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
@@ -25,24 +22,24 @@ function HomePage() {
     },
   });
 
-  const fadeInUp = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.5 },
-  };
+  // const fadeInUp = {
+  //   initial: { opacity: 0, y: 20 },
+  //   animate: { opacity: 1, y: 0 },
+  //   transition: { duration: 0.5 },
+  // };
 
-  const stagger = {
-    animate: {
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
+  // const stagger = {
+  //   animate: {
+  //     transition: {
+  //       staggerChildren: 0.1,
+  //     },
+  //   },
+  // };
 
   const { i18n } = useTranslation();
 
   const lang = i18n.language;
-  const isRTL = lang === "ar";
+  // const isRTL = lang === "ar";
 
   const homePage = data?.homePages?.[0];
 
@@ -55,12 +52,12 @@ function HomePage() {
         <section className="w-full -mt-6">
           <img src={HeroImage} alt="Hero" className="w-full" />
         </section>
-        <div className="container mx-auto px-4 py-16">
+        <section className="container mx-auto px-4 py-16">
           <div className="grid lg:grid-cols-2 gap-8 items-center ">
             <div className="space-y-8 text-right" dir="rtl">
               <Card className="border-2 border-blue-100 shadow-lg">
                 <CardHeader>
-                  <CardTitle className="text-3xl font-bold text-blue-800 ">
+                  <CardTitle className="~text-2xl/4xl text-center font-bold text-blue-800 ">
                     {lang === "ar"
                       ? homePage?.missionTitle_ar
                       : homePage?.missionTitle_en}
@@ -77,7 +74,7 @@ function HomePage() {
 
               <Card className="border-2 border-blue-100 shadow-lg">
                 <CardHeader>
-                  <CardTitle className="text-3xl font-bold text-blue-800">
+                  <CardTitle className="~text-2xl/4xl text-center font-bold text-blue-800">
                     {lang === "ar"
                       ? homePage?.aboutUsTitle_ar
                       : homePage?.aboutUsTitle_en}
@@ -105,7 +102,7 @@ function HomePage() {
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </main>
     </div>
   );
