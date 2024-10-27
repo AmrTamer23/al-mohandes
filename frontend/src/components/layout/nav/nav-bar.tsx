@@ -6,10 +6,9 @@ import clsx from "clsx";
 
 import { MenuIcon } from "lucide-react";
 
-import { DesktopNavList } from "./desktop-nav-list";
 import { MobileNavDropdown } from "./mobile-nav-list";
 import { LanguageToggle } from "@/components/layout/nav/lang-toggle";
-import { ModeToggle } from "@/components/layout/nav/mode-toggle";
+// import { ModeToggle } from "@/components/layout/nav/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
 import {
@@ -61,10 +60,10 @@ export function Navbar() {
   const isMobile = window.innerWidth < 768;
 
   return (
-    <nav className="fixed z-[50] mt-[2rem] flex h-fit w-full min-w-full items-center justify-center p-2">
+    <nav className="fixed z-[50] mt-3 flex h-fit w-full min-w-full items-center justify-center p-2">
       <div
         className={clsx(
-          "relative flex w-[90%] justify-between rounded-xl border border-white border-opacity-20 bg-white bg-opacity-10 p-2 shadow-lg backdrop-blur-lg backdrop-filter dark:border-zinc-900 dark:bg-black",
+          "relative flex w-[90%] justify-between rounded-xl border border-white border-opacity-20 bg-white bg-opacity-80 p-2 shadow-lg backdrop-blur-lg backdrop-filter dark:border-zinc-900 dark:bg-black",
           !isRTL ? "flex-row" : "flex-row-reverse",
         )}
       >
@@ -118,24 +117,13 @@ export function Navbar() {
             isRTL && "flex-row-reverse",
           )}
         >
-          {navigation.map((item, index) =>
-            item.title === "Services" ? (
-              <div key={`item-${index}`} className="group relative">
-                {DesktopNavList && (
-                  <DesktopNavList
-                    item={item}
-                    locale={i18n.language as "en" | "ar"}
-                  />
-                )}
-              </div>
-            ) : (
-              <Link to={item.path} key={`item-${index}`}>
-                <Button variant="ghost" className="text-lg">
-                  {isRTL ? item.titleAR : item.title}
-                </Button>
-              </Link>
-            ),
-          )}
+          {navigation.map((item, index) => (
+            <Link to={item.path} key={`item-${index}`}>
+              <Button variant="ghost" className="text-lg">
+                {isRTL ? item.titleAR : item.title}
+              </Button>
+            </Link>
+          ))}
           {/* <ModeToggle /> */}
           <LanguageToggle />
         </div>

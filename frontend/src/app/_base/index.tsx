@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useQuery } from "urql";
+import HeroImage from "@/assets/hero.png";
 
 import { ArrowRight, CheckCircle } from "lucide-react";
 
@@ -43,32 +44,8 @@ function HomePage() {
   return (
     <div className="flex min-h-screen w-full flex-col">
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
-          <div className="container px-4 md:px-6">
-            <motion.div
-              className="flex flex-col items-center space-y-4 text-center"
-              {...fadeInUp}
-            >
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                {lang === "ar"
-                  ? data?.homePages?.[0]?.heroTitle_ar
-                  : data?.homePages?.[0]?.heroTitle_en}
-              </h1>
-              <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl">
-                {lang === "ar"
-                  ? data?.homePages?.[0]?.heroDescription_ar
-                  : data?.homePages?.[0]?.heroDescription_en}
-              </p>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button className="bg-primary text-primary-foreground">
-                  Get Started <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </motion.div>
-            </motion.div>
-          </div>
+        <section className="w-full -mt-6">
+          <img src={HeroImage} alt="Hero" />
         </section>
         <section className="w-full bg-gray-100 py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
