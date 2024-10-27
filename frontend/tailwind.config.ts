@@ -1,20 +1,25 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { fontFamily } from "tailwindcss/defaultTheme"
+import { fontFamily } from "tailwindcss/defaultTheme";
 // @ts-ignore
-import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette"
-import plugin from "tailwindcss/plugin"
+import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette";
+import plugin from "tailwindcss/plugin";
+import fluid, { extract, screens } from "fluid-tailwind";
 
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-  ],
+  content: {
+    files: [
+      "./pages/**/*.{ts,tsx}",
+      "./components/**/*.{ts,tsx}",
+      "./app/**/*.{ts,tsx}",
+      "./src/**/*.{ts,tsx}",
+    ],
+    extract,
+  },
   theme: {
+    screens,
     container: {
       center: true,
       padding: "2rem",
@@ -110,7 +115,8 @@ export default {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment
           values: flattenColorPalette(theme("colors")),
         },
-      )
+      );
     }),
+    fluid,
   ],
-} satisfies Config
+} satisfies Config;

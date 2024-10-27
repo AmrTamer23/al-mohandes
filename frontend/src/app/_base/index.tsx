@@ -1,13 +1,17 @@
+"use client";
+
 import { useTranslation } from "react-i18next";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useQuery } from "urql";
 import HeroImage from "@/assets/hero.png";
+import BuildingImage from "@/assets/building.avif"; // Make sure to add this image to your assets
 
-import { ArrowRight, CheckCircle } from "lucide-react";
+import { ArrowRight, Building2, CheckCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { HomePageQuery } from "@/queries/fetch-homepage";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 export const Route = createFileRoute("/_base/")({
   component: HomePage,
@@ -38,67 +42,71 @@ function HomePage() {
   const { i18n } = useTranslation();
 
   const lang = i18n.language;
+  const isRTL = lang === "ar";
 
-  console.log(data?.homePages?.[0]?.heroTitle_ar);
+  const homePage = data?.homePages?.[0];
 
   return (
-    <div className="flex min-h-screen w-full flex-col">
+    <div
+      className="flex min-h-screen w-full flex-col"
+      dir={i18n.language === "ar" ? "rtl" : "ltr"}
+    >
       <main className="flex-1">
         <section className="w-full -mt-6">
-          <img src={HeroImage} alt="Hero" />
+          <img src={HeroImage} alt="Hero" className="w-full" />
         </section>
-        <section className="w-full bg-gray-100 py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <motion.h2
-              className="mb-8 text-center text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl"
-              {...fadeInUp}
-            >
-              Our Services
-            </motion.h2>
-            <motion.div
-              className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3"
-              variants={stagger}
-              initial="initial"
-              animate="animate"
-            >
-              {[
-                "Web Development",
-                "Mobile Apps",
-                "Cloud Solutions",
-                "Data Analytics",
-                "Cybersecurity",
-                "AI & Machine Learning",
-              ].map((service, index) => (
-                <motion.div
-                  key={index}
-                  className="flex items-center space-x-4"
-                  variants={{
-                    initial: { opacity: 0, y: 20 },
-                    animate: { opacity: 1, y: 0 },
-                  }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <CheckCircle className="h-6 w-6 text-primary" />
-                  <h3 className="text-xl font-bold">{service}</h3>
-                </motion.div>
-              ))}{" "}
-            </motion.div>
+        <div className="container mx-auto px-4 py-16">
+          <div className="grid lg:grid-cols-2 gap-8 items-center ">
+            <div className="space-y-8 text-right" dir="rtl">
+              <Card className="border-2 border-blue-100 shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-3xl font-bold text-blue-800 ">
+                    {lang === "ar"
+                      ? homePage?.missionTitle_ar
+                      : homePage?.missionTitle_en}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-gray-600 leading-relaxed">
+                  <p className="text-xl leading-loose">
+                    {lang === "ar"
+                      ? homePage?.missionDescription_ar
+                      : homePage?.missionDescription_en}
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 border-blue-100 shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-3xl font-bold text-blue-800">
+                    {lang === "ar"
+                      ? homePage?.aboutUsTitle_ar
+                      : homePage?.aboutUsTitle_en}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-gray-600 leading-relaxed">
+                  <p className="text-xl leading-loose">
+                    {lang === "ar"
+                      ? homePage?.aboutUsDescription_ar
+                      : homePage?.aboutUsDescription_en}
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+            <div className="relative">
+              <div className="aspect-square bg-blue-800 rounded-lg overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070"
+                  alt="Modern Building"
+                  className="w-full h-full object-cover mix-blend-overlay"
+                />
+              </div>
+              <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-lg shadow-xl">
+                <Building2 className="w-12 h-12 text-blue-800" />
+              </div>
+            </div>
           </div>
-        </section>
+        </div>
       </main>
-      <footer className="flex w-full shrink-0 flex-col items-center gap-2 border-t px-4 py-6 sm:flex-row md:px-6">
-        <p className="text-xs text-gray-500">
-          © 2024 Company Name. All rights reserved.
-        </p>
-        <nav className="flex gap-4 sm:ml-auto sm:gap-6">
-          <a className="text-xs underline-offset-4 hover:underline" href="#">
-            Terms of Service
-          </a>
-          <a className="text-xs underline-offset-4 hover:underline" href="#">
-            Privacy
-          </a>
-        </nav>
-      </footer>
     </div>
   );
 }
