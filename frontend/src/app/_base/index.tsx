@@ -9,6 +9,7 @@ import { Building2 } from "lucide-react";
 
 import { HomePageQuery } from "@/queries/fetch-homepage";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { PartnersSection } from "@/components/home/partners";
 
 export const Route = createFileRoute("/_base/")({
   component: HomePage,
@@ -103,6 +104,7 @@ function HomePage() {
             </div>
           </div>
         </section>
+        <PartnersSection lang={lang} />
       </main>
     </div>
   );
