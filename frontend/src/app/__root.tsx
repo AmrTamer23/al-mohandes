@@ -26,10 +26,15 @@ export const Route = createRootRoute({
 export default function RootLayout() {
   const [theme] = useAtom(themeAtom);
   return (
-    <div
-      className={clsx("min-h-dvh w-full", theme === "dark" ? "dark" : "light")}
-    >
-      <Outlet />
-    </div>
+    <>
+      <div
+        className={clsx(
+          "min-h-dvh w-full",
+          theme === "dark" ? "dark" : "light",
+        )}
+      >
+        <Outlet />
+      </div>
+    </>
   );
 }
