@@ -10,6 +10,7 @@ import { themeAtom } from "@/atoms/theme-atom";
 
 export const Route = createRootRoute({
   component: RootLayout,
+
   notFoundComponent: () => {
     return (
       <p className="flex h-dvh w-full items-center justify-center bg-background text-foreground">
@@ -27,6 +28,10 @@ export default function RootLayout() {
   const [theme] = useAtom(themeAtom);
   return (
     <>
+      <head>
+        <title>Al-Mohandes</title>
+        <meta name="description" content="Al-Mohandes" />
+      </head>
       <div
         className={clsx(
           "min-h-dvh w-full",
