@@ -14,6 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 const documents = {
+    "\n  query AboutPage($take: Int) {\n    aboutCompanies(take: $take) {\n      title_ar\n      title_en\n      introduction_ar\n      introduction_en\n      mission_ar\n      mission_en\n      vision_ar\n      vision_en\n      coreValues_ar\n      coreValues_en\n    }\n  }\n": types.AboutPageDocument,
     "\n  query HomePage($take: Int) {\n    homePages(take: $take) {\n      missionTitle_en\n      missionTitle_ar\n      missionDescription_en\n      missionDescription_ar\n      aboutUsTitle_en\n      aboutUsTitle_ar\n      aboutUsDescription_en\n      aboutUsDescription_ar\n      contactInfo_en\n      contactInfo_ar\n    }\n  }\n": types.HomePageDocument,
 };
 
@@ -31,6 +32,10 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query AboutPage($take: Int) {\n    aboutCompanies(take: $take) {\n      title_ar\n      title_en\n      introduction_ar\n      introduction_en\n      mission_ar\n      mission_en\n      vision_ar\n      vision_en\n      coreValues_ar\n      coreValues_en\n    }\n  }\n"): (typeof documents)["\n  query AboutPage($take: Int) {\n    aboutCompanies(take: $take) {\n      title_ar\n      title_en\n      introduction_ar\n      introduction_en\n      mission_ar\n      mission_en\n      vision_ar\n      vision_en\n      coreValues_ar\n      coreValues_en\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
