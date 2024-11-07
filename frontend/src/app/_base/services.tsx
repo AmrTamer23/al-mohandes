@@ -67,7 +67,7 @@ function OurServicesPage() {
             .map((service, index) => (
               <Card
                 key={index}
-                className="border-2 border-blue-100 shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                className="border-2 border-blue-100 shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 motion-preset-blur-up-lg"
               >
                 <div className="aspect-video relative">
                   {service.imageUrl ? (
