@@ -31,11 +31,11 @@ function AboutPage() {
     >
       <main className="flex-1">
         <section className="container mx-auto px-4 py-16">
-          <h1 className="text-5xl font-bold text-center text-blue-800 mb-12">
+          <h1 className="text-5xl font-bold text-center text-blue-800 mb-12 motion-preset-fade-lg">
             {lang === "ar" ? aboutCompany?.title_ar : aboutCompany?.title_en}
           </h1>
           <div className="grid lg:grid-cols-2 gap-8 items-start">
-            <Card className="border-2 border-blue-100 shadow-lg">
+            <Card className="border-2 border-blue-100 shadow-lg motion-preset-slide-left-lg ">
               <CardHeader>
                 <CardTitle className="text-3xl text-center font-bold text-blue-800 flex items-center justify-center gap-2">
                   <Users className="mr-2" />
@@ -50,8 +50,8 @@ function AboutPage() {
                 </p>
               </CardContent>
             </Card>
-            <div className="space-y-8">
-              <Card className="border-2 border-blue-100 shadow-lg">
+            <div className="space-y-8 motion-safe:motion-slide-in-from-right motion-delay-300">
+              <Card className="border-2 border-blue-100 shadow-lg motion-preset-slide-right-lg">
                 <CardHeader>
                   <CardTitle className="text-3xl text-center font-bold text-blue-800 flex items-center justify-center gap-2">
                     <Eye className="mr-2" />
@@ -70,17 +70,17 @@ function AboutPage() {
           </div>
         </section>
 
-        <section className="relative py-24 bg-blue-800">
+        <section className="relative py-24 bg-blue-800 motion-preset-blur-up-lg">
           <div className="absolute inset-0 overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070"
               alt=""
-              className="w-full h-full object-cover object-center opacity-20"
+              className="w-full h-full object-cover object-center opacity-20 motion-safe:motion-fade-in motion-duration-1000"
             />
           </div>
           <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-3xl mx-auto text-center">
-              <Building className="w-16 h-16 text-white mx-auto mb-6" />
+            <div className="max-w-3xl mx-auto text-center motion-safe:motion-fade-in motion-delay-200">
+              <Building className="w-16 h-16 text-white mx-auto mb-6 motion-safe:motion-slide-in-from-top" />
               <h2 className="text-3xl font-bold text-white mb-4">
                 {lang === "ar"
                   ? "بناء المستقبل معًا"
@@ -96,7 +96,7 @@ function AboutPage() {
         </section>
 
         <section className="container mx-auto px-4 py-16 space-y-4">
-          <Card className="border-2 border-blue-100 shadow-lg">
+          <Card className="border-2 border-blue-100 shadow-lg motion-safe:motion-slide-in-from-bottom motion-delay-100">
             <CardHeader>
               <CardTitle className="text-3xl text-center font-bold text-blue-800 flex items-center justify-center gap-2">
                 <Target className="mr-2" />
@@ -111,7 +111,7 @@ function AboutPage() {
               </p>
             </CardContent>
           </Card>
-          <Card className="border-2 border-blue-100 shadow-lg">
+          <Card className="border-2 border-blue-100 shadow-lg motion-safe:motion-slide-in-from-bottom motion-delay-200">
             <CardHeader>
               <CardTitle className="text-3xl text-center font-bold text-blue-800 flex items-center justify-center">
                 <Award className="mr-2" />
@@ -127,7 +127,10 @@ function AboutPage() {
             </CardContent>
           </Card>
         </section>
-        <PartnersSection lang={lang} />
+
+        <div className="motion-safe:motion-fade-in motion-delay-300">
+          <PartnersSection lang={lang} />
+        </div>
       </main>
     </main>
   );

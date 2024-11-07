@@ -1,12 +1,12 @@
-import fs from "node:fs"
-import { resolve } from "node:path"
-import { TanStackRouterVite } from "@tanstack/router-vite-plugin"
-import react from "@vitejs/plugin-react"
-import unfonts from "unplugin-fonts/vite"
-import { defineConfig } from "vite"
-import checker from "vite-plugin-checker"
-import eslintPlugin from "vite-plugin-eslint"
-import svgr from "vite-plugin-svgr"
+import fs from "node:fs";
+import { resolve } from "node:path";
+import { TanStackRouterVite } from "@tanstack/router-vite-plugin";
+import react from "@vitejs/plugin-react";
+import unfonts from "unplugin-fonts/vite";
+import { defineConfig } from "vite";
+import checker from "vite-plugin-checker";
+import eslintPlugin from "vite-plugin-eslint";
+import svgr from "vite-plugin-svgr";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -59,4 +59,4 @@ export default defineConfig(({ mode }) => ({
     }),
     eslintPlugin({ cache: false }),
   ],
-}))
+}));

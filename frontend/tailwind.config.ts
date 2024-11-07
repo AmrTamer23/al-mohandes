@@ -103,6 +103,7 @@ export default {
     require("tailwindcss-animate"),
     require("tailwindcss-interaction-media"),
     require("tailwindcss-safe-area"),
+    require("tailwindcss-motion"),
     plugin(({ matchUtilities, theme }) => {
       matchUtilities(
         {
