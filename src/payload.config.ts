@@ -71,6 +71,20 @@ export default buildConfig({
     ...plugins,
     // storage-adapter-placeholder
   ],
+  localization: {
+    locales: [
+      {
+        label: 'English',
+        code: 'en',
+      },
+      {
+        label: 'Arabic',
+        code: 'ar',
+        rtl: true,
+      },
+    ],
+    defaultLocale: 'ar',
+  },
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   typescript: {
