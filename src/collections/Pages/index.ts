@@ -33,22 +33,24 @@ export const Pages: CollectionConfig = {
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
-      url: ({ data }) => {
+      url: ({ data, locale }) => {
         const path = generatePreviewPath({
           slug: typeof data?.slug === 'string' ? data.slug : '',
           collection: 'pages',
+          locale: locale.code,
         })
 
-        return `${getServerSideURL()}${path}`
+        return `${process.env.NEXT_PUBLIC_SERVER_URL}${path}`
       },
     },
-    preview: (data) => {
+    preview: async (data, { locale }) => {
       const path = generatePreviewPath({
         slug: typeof data?.slug === 'string' ? data.slug : '',
         collection: 'pages',
+        locale: locale,
       })
 
-      return `${getServerSideURL()}${path}`
+      return `${process.env.NEXT_PUBLIC_SERVER_URL}${path}`
     },
     useAsTitle: 'title',
   },
@@ -62,7 +64,9 @@ export const Pages: CollectionConfig = {
       type: 'tabs',
       tabs: [
         {
-          fields: [hero],
+          fields: [
+           hero
+          ],
           label: 'Hero',
         },
         {
@@ -72,6 +76,7 @@ export const Pages: CollectionConfig = {
               type: 'blocks',
               blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
               required: true,
+              localized: true,
             },
           ],
           label: 'Content',

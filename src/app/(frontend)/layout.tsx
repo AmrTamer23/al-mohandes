@@ -17,6 +17,10 @@ import { draftMode } from 'next/headers'
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 
+export function generateStaticParams() {
+  return ['ar', 'en'].map((locale) => ({ locale }))
+}
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
 

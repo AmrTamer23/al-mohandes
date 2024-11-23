@@ -18,6 +18,10 @@ const nextConfig = {
       }),
     ],
   },
+  i18n: {
+    locales: ['en', 'ar'],
+    defaultLocale: 'ar',
+  },
   reactStrictMode: true,
   redirects,
 }

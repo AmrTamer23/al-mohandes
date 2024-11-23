@@ -7,31 +7,26 @@ import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
 import { homeStatic } from '@/endpoints/seed/home-static'
 
-import type { Page as PageType } from '@/payload-types'
+import type { Config, Page as PageType } from '@/payload-types'
 
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 
-export async function generateStaticParams() {
+export async function generateStaticParams({ params }: { params: { locale: Config['locale'] } }) {
+  const locale = params.locale
   const payload = await getPayload({ config: configPromise })
-  const pages = await payload.find({
+
+  const { docs: pages } = await payload.find({
     collection: 'pages',
+    locale: locale,
     draft: false,
-    limit: 1000,
-    overrideAccess: false,
   })
 
-  const params = pages.docs
-    ?.filter((doc) => {
-      return doc.slug !== 'home'
-    })
-    .map(({ slug }) => {
-      return { slug }
-    })
+  const slugs = pages.filter((page) => page.slug !== 'home').map(({ slug }) => ({ slug }))
 
-  return params
+  return slugs
 }
 
 type Args = {
