@@ -281,6 +281,81 @@ input ServiceCreateInput {
   imageUrl: String
 }
 
+type Project {
+  id: ID!
+  name_en: String
+  name_ar: String
+  clientName_en: String
+  clientName_ar: String
+  status_en: String
+  status_ar: String
+  workDone_en: String
+  workDone_ar: String
+  dateAcquired: String
+}
+
+input ProjectWhereUniqueInput {
+  id: ID
+}
+
+input ProjectWhereInput {
+  AND: [ProjectWhereInput!]
+  OR: [ProjectWhereInput!]
+  NOT: [ProjectWhereInput!]
+  id: IDFilter
+  name_en: StringFilter
+  name_ar: StringFilter
+  clientName_en: StringFilter
+  clientName_ar: StringFilter
+  status_en: StringFilter
+  status_ar: StringFilter
+  workDone_en: StringFilter
+  workDone_ar: StringFilter
+  dateAcquired: StringFilter
+}
+
+input ProjectOrderByInput {
+  id: OrderDirection
+  name_en: OrderDirection
+  name_ar: OrderDirection
+  clientName_en: OrderDirection
+  clientName_ar: OrderDirection
+  status_en: OrderDirection
+  status_ar: OrderDirection
+  workDone_en: OrderDirection
+  workDone_ar: OrderDirection
+  dateAcquired: OrderDirection
+}
+
+input ProjectUpdateInput {
+  name_en: String
+  name_ar: String
+  clientName_en: String
+  clientName_ar: String
+  status_en: String
+  status_ar: String
+  workDone_en: String
+  workDone_ar: String
+  dateAcquired: String
+}
+
+input ProjectUpdateArgs {
+  where: ProjectWhereUniqueInput!
+  data: ProjectUpdateInput!
+}
+
+input ProjectCreateInput {
+  name_en: String
+  name_ar: String
+  clientName_en: String
+  clientName_ar: String
+  status_en: String
+  status_ar: String
+  workDone_en: String
+  workDone_ar: String
+  dateAcquired: String
+}
+
 type OurServicesPage {
   id: ID!
   slug: String
@@ -636,6 +711,12 @@ type Mutation {
   updateServices(data: [ServiceUpdateArgs!]!): [Service]
   deleteService(where: ServiceWhereUniqueInput!): Service
   deleteServices(where: [ServiceWhereUniqueInput!]!): [Service]
+  createProject(data: ProjectCreateInput!): Project
+  createProjects(data: [ProjectCreateInput!]!): [Project]
+  updateProject(where: ProjectWhereUniqueInput!, data: ProjectUpdateInput!): Project
+  updateProjects(data: [ProjectUpdateArgs!]!): [Project]
+  deleteProject(where: ProjectWhereUniqueInput!): Project
+  deleteProjects(where: [ProjectWhereUniqueInput!]!): [Project]
   createOurServicesPage(data: OurServicesPageCreateInput!): OurServicesPage
   createOurServicesPages(data: [OurServicesPageCreateInput!]!): [OurServicesPage]
   updateOurServicesPage(where: OurServicesPageWhereUniqueInput!, data: OurServicesPageUpdateInput!): OurServicesPage
@@ -692,6 +773,9 @@ type Query {
   service(where: ServiceWhereUniqueInput!): Service
   services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
   servicesCount(where: ServiceWhereInput! = {}): Int
+  project(where: ProjectWhereUniqueInput!): Project
+  projects(where: ProjectWhereInput! = {}, orderBy: [ProjectOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProjectWhereUniqueInput): [Project!]
+  projectsCount(where: ProjectWhereInput! = {}): Int
   ourServicesPage(where: OurServicesPageWhereUniqueInput!): OurServicesPage
   ourServicesPages(where: OurServicesPageWhereInput! = {}, orderBy: [OurServicesPageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: OurServicesPageWhereUniqueInput): [OurServicesPage!]
   ourServicesPagesCount(where: OurServicesPageWhereInput! = {}): Int

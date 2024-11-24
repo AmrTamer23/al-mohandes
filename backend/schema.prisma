@@ -50,6 +50,19 @@ model Service {
   from_OurServicesPage_services OurServicesPage[] @relation("OurServicesPage_services")
 }
 
+model Project {
+  id            String @id @default(cuid())
+  name_en       String @default("")
+  name_ar       String @default("")
+  clientName_en String @default("")
+  clientName_ar String @default("")
+  status_en     String @default("")
+  status_ar     String @default("")
+  workDone_en   String @default("")
+  workDone_ar   String @default("")
+  dateAcquired  String @default("")
+}
+
 model OurServicesPage {
   id                  String    @id @default(cuid())
   slug                String    @default("our-services")

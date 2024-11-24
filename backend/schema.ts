@@ -7,9 +7,6 @@
 
 import { list } from "@keystone-6/core";
 import { allowAll } from "@keystone-6/core/access";
-
-// see https://keystonejs.com/docs/fields/overview for the full list of fields
-//   this is a few common fields for an example
 import {
   text,
   relationship,
@@ -18,12 +15,6 @@ import {
   select,
 } from "@keystone-6/core/fields";
 
-// the document field is a more complicated field, so it has it's own package
-import { document } from "@keystone-6/fields-document";
-// if you want to make your own fields, see https://keystonejs.com/docs/guides/custom-fields
-
-// when using Typescript, you can refine your types to a stricter subset by importing
-// the generated types from '.keystone/types'
 import { type Lists } from ".keystone/types";
 
 export const lists: Lists = {
@@ -110,6 +101,48 @@ export const lists: Lists = {
     access: allowAll,
   }),
 
+  Project: list({
+    fields: {
+      name_en: text({
+        label: "Project Name (English)",
+        validation: { isRequired: true },
+      }),
+      name_ar: text({
+        label: "Project Name (Arabic)",
+        validation: { isRequired: true },
+      }),
+      clientName_en: text({
+        label: "Client Name (English)",
+        validation: { isRequired: true },
+      }),
+      clientName_ar: text({
+        label: "Client Name (Arabic)",
+        validation: { isRequired: true },
+      }),
+      status_en: text({
+        label: "Status (English)",
+      }),
+      status_ar: text({
+        label: "Status (Arabic)",
+      }),
+      workDone_en: text({
+        ui: { displayMode: "textarea" },
+        label: "Work Done (English)",
+      }),
+      workDone_ar: text({
+        ui: { displayMode: "textarea" },
+        label: "Work Done (Arabic)",
+      }),
+      dateAcquired: text({
+        label: "Date Acquired",
+      }),
+      img: text({
+        label: "image URL",
+      }),
+    },
+    access: allowAll,
+  }),
+
   OurServicesPage: list({
     fields: {
       slug: text({
@@ -169,7 +202,6 @@ export const lists: Lists = {
     access: allowAll,
   }),
 
-  // Recruitment (توظيف) schema
   Recruitment: list({
     fields: {
       slug: text({
